@@ -68,19 +68,28 @@ print(f'Документация метода: {Archive.listapp.__doc__ = }')
 
 class Rectan:
     "Класс обработки двух переменных и вычисления площади и периметра четырёхсторонней фигуры"
-    def __init__(self, *args, lng = ' ', wdt = ' '):
-        "Получение переменных от пользователя"
-        self.lng = int(args[0])
-        self.wdt = int(args[-1])
+    def __new__(cls, lng, wdt):
+        "Получение переменных от пользователя, создание новой фигуры"
+        worker = super().__new__(cls)
+        worker.lng = int(lng)
+        worker.wdt = int(wdt)
+        return worker
+    def area(worker):
+        "Вычисление площади фигуры"
+        area = worker.lng * worker.wdt
+        return area
+    def perimet(worker):
+        "Вычисление периметра фигуры"
+        perimet = 2 * (worker.lng + worker.wdt)
+        return perimet
     def __str__(self):
         "Вывод результата"
-        return f'Площадь = {self.lng * self.wdt}\nПериметр = {2 * (self.lng + self.wdt)}'
+        return f'Площадь = {self.area()}\nПериметр = {self.perimet()}'
 
-
-print('\n5.:')
 paramets = input("5. Введите желаемую длину и ширину прямоугольника через пробел\n: ")
 paramets = paramets.split()
 ex = Rectan(paramets[0], paramets[-1])
-print(ex)
-print(f'Документация класса: {Rectan.__doc__ = }')
-print(f'Документация экземпляра: {paramets.__doc__ = }')
+ex2 = Rectan(25, 25)
+print(f'\nПример 1:\n{ex}\n\nПример 2:\n{ex2}\n\nСумма периметров двух фигур = {ex.perimet() + ex2.perimet()}\nРазность периметров двух фигур = {ex.perimet() - ex2.perimet()}')
+print(f'\nДокументация класса: {Rectan.__doc__ = }')
+print(f'Документация экземпляра: {ex.__doc__ = }')
