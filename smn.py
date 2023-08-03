@@ -68,11 +68,15 @@ print(f'Документация метода: {Archive.listapp.__doc__ = }')
 
 class Rectan:
     "Класс обработки двух переменных и вычисления площади и периметра четырёхсторонней фигуры"
-    def __new__(cls, lng, wdt):
+    def __new__(cls, lng, wdt, figur = ''):
         "Получение переменных от пользователя, создание новой фигуры"
         worker = super().__new__(cls)
         worker.lng = int(lng)
         worker.wdt = int(wdt)
+        if lng == wdt:
+            worker.figur = figur + 'Квадрат'
+        else:
+            worker.figur = figur + 'Прямоугольник'
         return worker
     def area(worker):
         "Вычисление площади фигуры"
@@ -86,10 +90,19 @@ class Rectan:
         "Вывод результата"
         return f'Площадь = {self.area()}\nПериметр = {self.perimet()}'
 
-paramets = input("5. Введите желаемую длину и ширину прямоугольника через пробел\n: ")
+paramets = input("\n5. Введите желаемую длину и ширину прямоугольника через пробел\n: ")
 paramets = paramets.split()
 ex = Rectan(paramets[0], paramets[-1])
 ex2 = Rectan(25, 25)
-print(f'\nПример 1:\n{ex}\n\nПример 2:\n{ex2}\n\nСумма периметров двух фигур = {ex.perimet() + ex2.perimet()}\nРазность периметров двух фигур = {ex.perimet() - ex2.perimet()}')
+print(f'\nПример 1 (длина: {ex.lng}, ширина: {ex.wdt}, {ex.figur}):\n{ex}\n\nПример 2 (длина: {ex2.lng}, ширина: {ex2.wdt}, {ex2.figur}):\n{ex2}\n\nСумма периметров двух фигур: {ex.perimet()} + {ex2.perimet()} =  {ex.perimet() + ex2.perimet()}\nРазность периметров двух фигур: {ex.perimet()} - {ex2.perimet()} = {ex.perimet() - ex2.perimet()}')
+if ex.area() < ex2.area():
+    print(f'\n6. Площадь первой фигуры меньше второй.')
+elif ex.area() > ex2.area():
+    print(f'\n6. Площадь первой фигуры больше второй.')
+elif ex.area() == ex2.area():
+    print(f'\n6. Площади фигур равны.')
+if ex.area() != ex2.area():
+    print(f'Площади фигур не равны.')
 print(f'\nДокументация класса: {Rectan.__doc__ = }')
 print(f'Документация экземпляра: {ex.__doc__ = }')
+print(f'Документация метода: {Rectan.perimet.__doc__ = }')
