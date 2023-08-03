@@ -67,10 +67,13 @@ print(f'Документация экземпляра: {listalpha.__doc__ = }')
 print(f'Документация метода: {Archive.listapp.__doc__ = }')
 
 class Rectan:
+    "Класс обработки двух переменных и вычисления площади и периметра четырёхсторонней фигуры"
     def __init__(self, *args, lng = ' ', wdt = ' '):
+        "Получение переменных от пользователя"
         self.lng = int(args[0])
         self.wdt = int(args[-1])
     def __str__(self):
+        "Вывод результата"
         return f'Площадь = {self.lng * self.wdt}\nПериметр = {2 * (self.lng + self.wdt)}'
 
 
@@ -79,3 +82,5 @@ paramets = input("5. Введите желаемую длину и ширину 
 paramets = paramets.split()
 ex = Rectan(paramets[0], paramets[-1])
 print(ex)
+print(f'Документация класса: {Rectan.__doc__ = }')
+print(f'Документация экземпляра: {paramets.__doc__ = }')
